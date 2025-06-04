@@ -1,0 +1,243 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Hide scrollbars for the whole page */
+}
+
+.login-container {
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden; /* Prevent inner scroll */
+  background: url("../../../assets/img/image.jpg") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 8vw;
+  padding-top: 5vh;
+}
+
+.login-card {
+  position: fixed;
+  top: 5vh;
+  left: 8vw;
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  background-color: rgba(255, 255, 255, 0.18); /* More transparent */
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease-in-out;
+  max-height: 90vh; /* Prevent card from overflowing */
+  overflow: hidden;
+  z-index: 10; /* Card above stars */
+}
+
+.login-card:hover {
+  transform: scale(1.02);
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+  background: rgba(255,255,255,0.18); /* match card transparency */
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(36,26,71,0.06);
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #e7c873cc 0%, #a259e6cc 100%); /* semi-transparent gradient */
+  color: #241a47;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 0 2px 8px rgba(162, 89, 230, 0.10);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  letter-spacing: 0.5px;
+  margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(90deg, #a259e6cc 0%, #e7c873cc 100%);
+  color: #fffbe6;
+  box-shadow: 0 4px 16px rgba(162, 89, 230, 0.18);
+}
+
+.mat-input-element, input {
+  background: transparent !important;
+  color: #241a47 !important;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background: transparent !important;
+  border-radius: 8px;
+}
+
+mat-label, .mat-form-field-label {
+  color: rgba(36, 26, 71, 0.78) !important;   /* Deep purple, thoda transparent */
+  text-shadow: 0 0 6px rgba(226, 200, 115, 0.10); /* Soft gold glow */
+  background: transparent !important;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.mat-form-field-underline,
+.mat-form-field-ripple {
+  display: none !important;
+  height: 0 !important;
+}
+
+/* Astrology animated stars background */
+.stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 1; /* Stars background */
+}
+
+.star {
+  position: absolute;
+  width: 4px; height: 4px;                /* Pehle 2px tha, ab 4px */
+  background: #fffbe6;
+  border-radius: 50%;
+  opacity: 0.85;
+  animation: twinkle 3s infinite alternate; /* Thoda slow aur visible */
+  box-shadow: 0 0 12px 4px #e7c87355;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.6; box-shadow: 0 0 8px 2px #e7c87388; }
+  to   { opacity: 1;   box-shadow: 0 0 20px 8px #a259e6aa; }
+}
+
+/* Shooting stars effect */
+.shooting-stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 2; /* Above background, below card */
+  overflow: hidden;
+}
+
+.shooting-star {
+  position: absolute;
+  top: 10%;
+  left: -10vw;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(180deg, #fffbe6 0%, #e7c873 80%, transparent 100%);
+  opacity: 0.8;
+  border-radius: 2px;
+  transform: rotate(-20deg);
+  animation: shooting 5s linear infinite;
+}
+
+.shooting-star:nth-child(2) {
+  top: 30%;
+  left: -15vw;
+  width: 2px;
+  height: 60px;
+  animation-delay: 0.8s;
+  animation-duration: 4.5s;
+}
+
+.shooting-star:nth-child(3) {
+  top: 55%;
+  left: -12vw;
+  width: 2px;
+  height: 90px;
+  animation-delay: 1.5s;
+  animation-duration: 6s;
+}
+
+.shooting-star:nth-child(4) {
+  top: 75%;
+  left: -18vw; 
+  width: 2px;
+  height: 70px;
+  animation-delay: 1.1s;
+  animation-duration: 5.2s;
+}
+/* m */
+.shooting-star:nth-child(5) {
+  top: 85%;
+  left: -20vw;
+  width: 2px;
+  height: 100px;
+  animation-delay: 2s;
+  animation-duration: 5.8s;
+}
+
+@keyframes shooting {
+  0% {
+    opacity: 0;
+    transform: translateX(0) rotate(-20deg) scaleY(1);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(10vw) rotate(-20deg) scaleY(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(110vw) rotate(-20deg) scaleY(0.8);
+  }
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    padding-left: 0;
+    padding-top: 0;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .login-card {
+    left: 0;
+    top: 2vh;
+    right: 0;
+    margin: 0 auto;
+    width: 94vw;
+    max-width: 98vw;
+    min-width: 0;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  mat-form-field {
+    font-size: 0.98rem;
+  }
+
+  button[type="submit"] {
+    font-size: 0.98rem;
+    padding: 0.6rem;
+  }
+}
+
+.login-logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  margin-top: 2vh;
+  z-index: 20;
+}
+
+.login-logo img {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 50%;
+  /* box-shadow: 0 4px 24px rgba(226, 200, 115, 0.18), 0 2px 8px rgba(162, 89, 230, 0.10);
+  background: linear-gradient(135deg, #e7c873 60%, #a259e6 100%); */
+  padding: 8px;
+}

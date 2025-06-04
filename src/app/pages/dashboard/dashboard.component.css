@@ -1,0 +1,177 @@
+:host {
+  display: block;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  /* background: linear-gradient(135deg, #2d1e3f 0%, #3c2a52 100%); */
+  color: #e0c878;
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: hidden; 
+}
+
+/* Hide scrollbar for body */
+body {
+  overflow: hidden;
+}
+
+/* Header */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  color: #e0c878;
+  margin-bottom: 0.3rem;
+  text-shadow: 0 0 15px rgba(224, 200, 120, 0.3);
+}
+
+.dashboard-header p {
+  font-size: 1.2rem;
+  color: #604f70;
+}
+
+/* Date Display */
+/* .dashboard-date {
+  text-align: right;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #B8A4FF;
+  margin-bottom: 15px;
+} */
+
+.page-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* Card Styling */
+.astro-dashboard-card {
+  background: linear-gradient(120deg, #2d1e3f 60%, #3c2a52 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.4s, box-shadow 0.4s;
+  box-shadow: 0 12px 24px rgba(45, 30, 63, 0.4);
+  border: 1.5px solid #e0c878;
+  color: #f5e9ff;
+}
+
+.astro-dashboard-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(224, 200, 120, 0.2);
+  background: linear-gradient(120deg, #3c2a52 60%, #2d1e3f 100%);
+}
+
+.astro-card-icon-avatar {
+  background: radial-gradient(circle, #e0c878 0%, #9e8b4e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+  box-shadow: 0 2px 10px rgba(224, 200, 120, 0.3);
+}
+
+.astro-card-icon-avatar mat-icon {
+  font-size: 22px;
+  color: #2d1e3f;
+}
+
+mat-card-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(224, 200, 120, 0.2);
+}
+
+mat-card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #e0c878;
+  text-shadow: 0 0 8px rgba(224, 200, 120, 0.3);
+}
+
+mat-card-content {
+  padding: 20px;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #9e8b4e;
+  margin-bottom: 12px;
+}
+
+.card-description {
+  font-size: 1rem;
+  color: #604f70;
+  line-height: 1.6;
+  min-height: 50px;
+}
+
+mat-card-actions {
+  padding: 0 20px 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-card-actions button {
+  font-weight: 600;
+  color: #2d1e3f;
+  background: linear-gradient(90deg, #e0c878 0%, #9e8b4e 100%);
+  border-radius: 6px;
+  padding: 8px 18px;
+  box-shadow: 0 2px 8px rgba(224, 200, 120, 0.3);
+  border: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+mat-card-actions button:hover {
+  background: linear-gradient(90deg, #9e8b4e 0%, #e0c878 100%);
+  color: #2d1e3f;
+  box-shadow: 0 4px 16px rgba(224, 200, 120, 0.4);
+  transform: translateY(-2px);
+}
+
+@keyframes goldShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.astro-dashboard-card {
+  background-size: 200% 200%;
+  animation: goldShimmer 15s ease infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-header h1 {
+    font-size: 2rem;
+  }
+
+  .card-value {
+    font-size: 1.5rem;
+  }
+
+  .astro-card-icon-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .astro-card-icon-avatar mat-icon {
+    font-size: 18px;
+  }
+}

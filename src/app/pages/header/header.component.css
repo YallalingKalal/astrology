@@ -1,0 +1,241 @@
+/* Router Outlet Container */
+.app-container {
+    padding: 24px;
+    /* Remove fixed height and allow content to grow */
+    min-height: calc(100vh - 64px);
+    height: auto;
+    overflow-y: auto;
+    /* background: #2d1e3f; */
+}
+
+/* Container Styles */
+.example-container {
+    height: 100vh;
+}
+
+.example-sidenav {
+    width: 260px;
+    border: none;
+    box-shadow: 4px 0 8px rgba(45, 30, 63, 0.3);
+    background: linear-gradient(135deg, #2d1e3f 0%, #3c2a52 100%);
+}
+
+mat-drawer {
+    height: 100%;
+}
+
+mat-icon {
+    font-size: 25px;
+}
+
+mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+    background: linear-gradient(120deg, #2d1e3f 60%, #3c2a52 100%);
+    color: #e0c878;
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-shadow: 0 2px 8px rgba(45, 30, 63, 0.3);
+    text-shadow: 0 0 10px rgba(224, 200, 120, 0.3);
+}
+
+mat-icon {
+    color: #e0c878;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.title {
+    margin-left: 10px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+}
+
+.title h2,
+.title-heading {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 0;
+    color: #e0c878;
+    text-shadow: 0 0 10px rgba(224, 200, 120, 0.3);
+}
+
+/* Styling for the description paragraph */
+.title p {
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.9em;
+    color: #604f70; /* Faint purple for secondary text */
+}
+
+.button {
+    padding-left: 15px;
+}
+
+/* Mat-Toolbar Stylesheet Matching Sidebar Styling */
+
+/* Toolbar Container */
+mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1100;
+    background: linear-gradient(120deg, #2d1e3f 60%, #3c2a52 100%);
+    color: #e0c878;
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-shadow: 0 2px 8px rgba(45, 30, 63, 0.3);
+    text-shadow: 0 0 10px rgba(224, 200, 120, 0.3);
+}
+
+/* Icon Button Styling */
+mat-toolbar button {
+    color: #e0c878;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+mat-toolbar button:hover {
+    color: #dbab01;
+    /* Accent color from sidebar gradient */
+    transform: scale(1.1);
+    background: rgba(57, 42, 107, 0.2); /* Faint purple background */
+}
+
+/* Spacer for Centering Title */
+.example-spacer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Title Styling */
+.title {
+    text-align: center;
+    padding: 0 16px;
+}
+
+.title-heading {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* Navigation and Search Form Styling */
+mat-toolbar nav {
+    margin-left: 16px;
+}
+
+mat-toolbar nav .container-fluid {
+    display: flex;
+    align-items: center;
+}
+
+mat-toolbar nav form {
+    display: flex;
+    align-items: center;
+}
+
+/* Search Input Styling */
+mat-toolbar nav input.form-control {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #2d1e3f; /* Deep purple */
+    /* Slightly lighter dark tone */
+    color: #e0c878;
+    border: 1px solid rgba(224, 200, 120, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+mat-toolbar nav input.form-control::placeholder {
+    color: #aaa;
+}
+
+mat-toolbar nav input.form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #3c2a52;
+    /* Faint purple glow */
+    border-color: #e0c878;
+}
+
+/* Search Button Styling */
+mat-toolbar nav button.btn {
+    margin-left: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #e0c878 0%, #9e8b4e 100%);
+    /* Accent color matching sidebar gradient */
+    color: #2d1e3f; /* Deep purple text */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+mat-toolbar nav button.btn:hover {
+    background: linear-gradient(90deg, #9e8b4e 0%, #e0c878 100%);
+    box-shadow: 0 0 15px rgba(224, 200, 120, 0.3);
+}
+
+/* Current Date Styling */
+.current-date {
+    margin-right: 16px;
+    color: #e0c878;
+    font-size: 1.08rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px rgba(224, 200, 120, 0.2);
+    font-family: 'Roboto', 'Georgia', serif;
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .example-sidenav {
+        width: 240px;
+        background: linear-gradient(135deg, #2d1e3f 0%, #3c2a52 100%);
+    }
+
+    .title-heading {
+        font-size: 24px;
+    }
+
+    mat-toolbar {
+        padding: 0 8px;
+    }
+
+    .app-container {
+        padding: 12px;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animations */
+.mat-toolbar {
+    animation: fadeIn 0.3s ease-out;
+}
