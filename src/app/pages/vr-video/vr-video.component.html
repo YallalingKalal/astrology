@@ -1,0 +1,33 @@
+<h2 class="vr-form-title">VR Temple Darshan Video Submission</h2>
+<form class="vr-form" #vrForm="ngForm">
+  <mat-form-field appearance="outline" class="vr-form-field">
+    <mat-label>Name</mat-label>
+    <input matInput name="Name" ngModel required>
+  </mat-form-field>
+
+  <!-- <mat-form-field appearance="outline" class="vr-form-field">
+    <mat-label>Location</mat-label>
+    <input matInput name="location" ngModel required>
+  </mat-form-field> -->
+
+  <mat-form-field appearance="outline" class="vr-form-field">
+    <mat-label>Video Title</mat-label>
+    <input matInput name="videoTitle" ngModel required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="vr-form-field">
+    <mat-label>Description</mat-label>
+    <textarea matInput name="description" ngModel rows="3"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="vr-form-field">
+    <mat-label>Video Link (YouTube/360° VR)</mat-label>
+    <input matInput name="videoUrl" ngModel required>
+  </mat-form-field>
+
+  <div class="vr-form-actions">
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-button type="reset">Reset</button>
+  </div>
+</form>
+

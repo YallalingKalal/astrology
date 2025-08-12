@@ -1,0 +1,111 @@
+.kundali-form-container {
+  max-width: 800px;  /* Increased from 600px to 800px */
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(45, 30, 63, 0.3);
+  border: 1px solid rgba(224, 200, 120, 0.2);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* Styling for form fields */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #e0c878;
+}
+
+::ng-deep .mat-form-field-label {
+  color: #9e8b4e !important;
+}
+
+::ng-deep .mat-input-element {
+  color: #e0c878 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #e0c878 !important;
+}
+
+::ng-deep .mat-select-value {
+  color: #e0c878 !important;
+}
+
+::ng-deep .mat-select-arrow {
+  color: #9e8b4e;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.form-actions button {
+  background: linear-gradient(45deg, #e0c878, #9e8b4e);
+  color: #2d1e3f;
+  padding: 0.8rem 2.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.form-actions button:hover {
+  background: linear-gradient(45deg, #9e8b4e, #e0c878);
+  box-shadow: 0 0 15px rgba(224, 200, 120, 0.4);
+  transform: translateY(-2px);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #e0c878;
+  font-size: 2rem;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(224, 200, 120, 0.3);
+}
+
+/* Error messages styling */
+::ng-deep .mat-error {
+  color: #e0c878 !important;
+  opacity: 0.8;
+}
+
+/* Datepicker styling */
+::ng-deep .mat-datepicker-toggle {
+  color: #9e8b4e !important;
+}
+
+/* Select dropdown panel */
+::ng-deep .mat-select-panel {
+  background: #2d1e3f !important;
+  border: 1px solid #604f70;
+}
+
+::ng-deep .mat-option {
+  color: #e0c878 !important;
+}
+
+::ng-deep .mat-option:hover {
+  background: #3c2a52 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .kundali-form-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}

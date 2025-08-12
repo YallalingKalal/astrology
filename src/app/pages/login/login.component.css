@@ -82,7 +82,7 @@ button[type="submit"]:hover {
 }
 
 mat-label, .mat-form-field-label {
-  color: rgba(36, 26, 71, 0.78) !important;   /* Deep purple, thoda transparent */
+  color: rgba(36, 26, 71, 0.78) !important;  
   text-shadow: 0 0 6px rgba(226, 200, 115, 0.10); /* Soft gold glow */
   background: transparent !important;
   font-weight: 500;
@@ -106,11 +106,11 @@ mat-label, .mat-form-field-label {
 
 .star {
   position: absolute;
-  width: 4px; height: 4px;                /* Pehle 2px tha, ab 4px */
+  width: 4px; height: 4px;                
   background: #fffbe6;
   border-radius: 50%;
   opacity: 0.85;
-  animation: twinkle 3s infinite alternate; /* Thoda slow aur visible */
+  animation: twinkle 3s infinite alternate; 
   box-shadow: 0 0 12px 4px #e7c87355;
 }
 

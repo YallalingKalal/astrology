@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+}
+
+button[mat-icon-button] {
+  background: none !important;
+  box-shadow: none !important;
+  background: none !important; /* Removes any background color */
+  border: none !important;     /* Removes any border */
+  outline: none !important;    /* Removes outline on focus, if any */
+
+}

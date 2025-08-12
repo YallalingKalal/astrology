@@ -1,0 +1,128 @@
+<div class="astrology-header">
+  <h1>Expert Astrologers</h1>
+  <p>Connect with India's most trusted astrologers for personalized guidance</p>
+</div>
+
+<div class="search-filter">
+  <input type="text" placeholder="Search astrologers..." class="search-input">
+  <select class="filter-select">
+    <option value="">Filter by Specialization</option>
+    <option value="vedic">Vedic Astrology</option>
+    <option value="numerology">Numerology</option>
+    <option value="tarot">Tarot Reading</option>
+  </select>
+</div>
+
+<div class="astrologer-container">
+  <div class="astrologer-card" *ngFor="let astrologer of astrologers" [style.background-color]="astrologer.bgColor">
+    <div class="card-header">
+      <div class="profile-initial">{{ astrologer.name[0] }}</div>
+      <span class="availability-badge" [class.available]="astrologer.isAvailable">
+        {{ astrologer.isAvailable ? 'Available' : 'Busy' }}
+      </span>
+    </div>
+
+    <div class="card-content">
+      <div class="name-edit">
+        <ng-container *ngIf="!astrologer.isEditing; else editMode">
+          <h2 class="astrologer-name">{{ astrologer.name }}</h2>
+          <button class="edit-button" (click)="onEditProfile(astrologer)">
+            <i class="fas fa-edit"></i>
+          </button>
+        </ng-container>
+      </div>
+
+      <ng-template #editMode>
+        <div class="edit-form">
+          <div class="form-group">
+            <label>Name:</label>
+            <input type="text" [(ngModel)]="editedAstrologer!.name" class="edit-input">
+          </div>
+
+          <div class="form-group">
+            <label>Phone:</label>
+            <input type="text" [(ngModel)]="editedAstrologer!.phone" class="edit-input">
+          </div>
+
+          <div class="form-group">
+            <label>Education:</label>
+            <input type="text" [(ngModel)]="editedAstrologer!.education" class="edit-input">
+          </div>
+
+          <div class="form-group">
+            <label>Experience (years):</label>
+            <input type="number" [(ngModel)]="editedAstrologer!.experience" class="edit-input">
+          </div>
+
+          <div class="form-group">
+            <label>Price (₹):</label>
+            <input type="number" [(ngModel)]="editedAstrologer!.price" class="edit-input">
+          </div>
+
+          <div class="form-group">
+            <label>Languages:</label>
+            <div class="tags-container">
+              <span class="tag" *ngFor="let lang of editedAstrologer!.languages">
+                {{ lang }}
+                <i class="fas fa-times" (click)="removeLanguage(lang, editedAstrologer!)"></i>
+              </span>
+            </div>
+            <input type="text" placeholder="Add language..." class="edit-input"
+                   (keyup)="onAddLanguage($event, editedAstrologer!)">
+          </div>
+
+          <div class="form-group">
+            <label>Specializations:</label>
+            <div class="tags-container">
+              <span class="tag" *ngFor="let spec of editedAstrologer!.specialization">
+                {{ spec }}
+                <i class="fas fa-times" (click)="removeSpecialization(spec, editedAstrologer!)"></i>
+              </span>
+            </div>
+            <input type="text" placeholder="Add specialization..." class="edit-input"
+                   (keyup)="onAddSpecialization($event, editedAstrologer!)">
+          </div>
+
+          <div class="edit-actions">
+            <button class="save-button" (click)="onSaveProfile(astrologer)">
+              <i class="fas fa-check"></i> Save
+            </button>
+            <button class="cancel-button" (click)="onCancelEdit(astrologer)">
+              <i class="fas fa-times"></i> Cancel
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+      <div class="rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-number">{{ astrologer.rating }}/5</span>
+      </div>
+
+      <div class="astrologer-details">
+        <p><i class="fas fa-graduation-cap"></i> {{ astrologer.education }}</p>
+        <p><i class="fas fa-language"></i> {{ astrologer.languages.join(', ') }}</p>
+        <p><i class="fas fa-star"></i> Experience: {{ astrologer.experience }} years</p>
+      </div>
+
+      <div class="specialization-tags">
+        <span class="tag" *ngFor="let spec of astrologer.specialization">
+          {{ spec }}
+        </span>
+      </div>
+
+      <div class="consultation-info">
+        <div class="price">
+          <span class="amount">₹{{ astrologer.price }}</span>
+          <span class="duration">/30 mins</span>
+        </div>
+        <button 
+          class="talk-button" 
+          [disabled]="!astrologer.isAvailable"
+          (click)="onTalkToAstrologer(astrologer.phone)">
+          <i class="fab fa-whatsapp"></i> Chat Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

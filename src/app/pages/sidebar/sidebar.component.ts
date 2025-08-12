@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,32 +16,40 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
   ],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css',
+  styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, AfterViewInit {
   userRole: string | null = null;
 
   constructor(private router: Router) {
     this.userRole = localStorage.getItem('userRole');
   }
 
+
   ngOnInit() {
     // Refresh role when component initializes
     this.userRole = localStorage.getItem('userRole');
+    // No GSAP animations
   }
 
 
+  ngAfterViewInit() {
+    // No GSAP animations
+  }
+
+
+  // Removed GSAP sidebar animations
+
+
+  // Removed GSAP menu animations
 
   logout() {
     try {
-      localStorage.clear(); // Clear all localStorage items
+      localStorage. clear(); // Clear all localStorage items
 
       this.router.navigate(['/login']);
     } catch (error) {
       console.error('Logout error:', error);
-
     }
   }
-
-
 }

@@ -1,1 +1,37 @@
-<p>add-item works!</p>
+<div class="events-container">
+  <div class="flip-card" *ngFor="let stone of stones">
+    <div class="flip-card-inner">
+      <!-- Front Side -->
+      <div class="flip-card-front">
+        <img [src]="stone.image" [alt]="stone.name + ' प्रतिमा'" class="event-image">
+        <h3>{{ stone.name }}</h3>
+        <p class="price"><strong>किंमत:</strong> {{ stone.price }}</p>
+        <button class="edit-button" (click)="editStone(stone)">संपादित करा</button>
+      </div>
+      <!-- Back Side -->
+      <div class="flip-card-back">
+        <div class="event-details" *ngIf="!stone.isEditing">
+          <h3>{{ stone.name }}</h3>
+          <p class="stone-description">{{ stone.fullInfo }}</p>
+          <p><strong>गुणधर्म:</strong> {{ stone.properties }}</p>
+          <p><strong>संबंधित राशी:</strong> {{ stone.zodiac }}</p>
+          <p><strong>चक्र:</strong> {{ stone.chakra }}</p>
+          <button class="edit-button" (click)="editStone(stone)">संपादित करा</button>
+        </div>
+        <!-- Edit Form -->
+        <div class="edit-form" *ngIf="stone.isEditing">
+          <input [(ngModel)]="stone.name" placeholder="नाव">
+          <textarea [(ngModel)]="stone.fullInfo" placeholder="संपूर्ण माहिती"></textarea>
+          <input [(ngModel)]="stone.properties" placeholder="गुणधर्म">
+          <input [(ngModel)]="stone.zodiac" placeholder="राशी">
+          <input [(ngModel)]="stone.chakra" placeholder="चक्र">
+          <input [(ngModel)]="stone.price" placeholder="किंमत">
+          <div class="button-group">
+            <button class="save-button" (click)="saveStone(stone)">जतन करा</button>
+            <button class="cancel-button" (click)="cancelEdit(stone)">रद्द करा</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

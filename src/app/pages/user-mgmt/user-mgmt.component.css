@@ -1,0 +1,334 @@
+/* container */
+.user-mgmt-container {
+  min-height: 100vh;
+  background: #2d1e3f;
+  color: #e0c878;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* card */
+.table-card {
+  background: rgba(224, 200, 120, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(224, 200, 120, 0.3);
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 40px 20px;
+}
+
+/* title */
+h2 {
+  text-align: center;
+  color: #2d1e3f;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* Stats Section */
+.stats-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.total-members-card {
+  background: #2d1e3f;
+  color: #ffe082;
+  padding: 6px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(45, 30, 63, 0.15);
+  border: 1px solid rgba(224, 200, 120, 0.18);
+  min-width: 90px;
+  max-width: 120px;
+  height: 38px;
+}
+
+.members-icon {
+  font-size: 20px;
+  color: #ffe082;
+  background: rgba(224, 200, 120, 0.08);
+  padding: 4px;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.members-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.members-count {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffe082;
+  line-height: 1;
+}
+
+.members-label {
+  font-size: 10px;
+  color: #ffe082;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 0;
+}
+
+/* search */
+.filter-input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* table wrapper (adds horizontal scroll when needed) */
+.table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+}
+
+/* table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  min-width: 800px;
+}
+
+th, td {
+  padding: 16px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(45, 30, 63, 0.15);
+  color: #2d1e3f;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+th {
+  background: rgba(224, 200, 120, 0.2);
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tr:hover {
+  background: rgba(224, 200, 120, 0.15);
+  transition: background 0.2s;
+}
+
+.action-cell {
+  white-space: nowrap;
+}
+
+.action-cell button {
+  margin-right: 8px;
+}
+
+/* paginator */
+.mat-paginator {
+  margin-top: 10px;
+  color: #2d1e3f;
+  background: rgba(224, 200, 120, 0.1);
+  border-radius: 8px;
+}
+
+/* dialog extras */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* responsive tweaks */
+@media (max-width: 1024px) {
+  .table-card {
+    padding: 30px 20px;
+    margin: 20px 10px;
+  }
+  th, td {
+    font-size: 14px;
+    padding: 12px 10px;
+  }
+  table {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-card {
+    padding: 20px 15px;
+    margin: 15px 5px;
+  }
+  
+  .stats-section {
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  
+  .total-members-card {
+    min-width: 160px;
+    padding: 12px 20px;
+  }
+  
+  .members-icon {
+    font-size: 28px;
+    width: 42px;
+    height: 42px;
+  }
+  
+  .members-count {
+    font-size: 20px;
+  }
+  
+  th, td {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+  table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .table-card {
+    padding: 15px 10px;
+    margin: 10px 2px;
+  }
+  th, td {
+    font-size: 12px;
+    padding: 8px 6px;
+  }
+  table {
+    min-width: 500px;
+  }
+}
+
+/* card-style rows for very small screens */
+@media (max-width: 480px) {
+  .stats-section {
+    margin-bottom: 12px;
+  }
+  
+  .total-members-card {
+    min-width: 140px;
+    padding: 10px 16px;
+    gap: 8px;
+  }
+  
+  .members-icon {
+    font-size: 24px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .members-count {
+    font-size: 18px;
+  }
+  
+  .members-label {
+    font-size: 10px;
+  }
+  
+  .table-container {
+    overflow-x: visible;
+  }
+  
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  tr {
+    margin: 0 0 1rem 0;
+    border: 1px solid rgba(224, 200, 120, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+  }
+  
+  td {
+    border: none;
+    border-bottom: 1px solid rgba(224, 200, 120, 0.3);
+    position: relative;
+    padding: 8px 8px 8px 45%;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+  }
+  
+  td:last-child {
+    border-bottom: none;
+  }
+  
+  td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 12px;
+    width: 40%;
+    font-weight: 700;
+    color: #2d1e3f;
+    font-size: 11px;
+  }
+  
+  /* Labels for mobile view */
+  td:nth-of-type(1):before { content: "ID"; }
+  td:nth-of-type(2):before { content: "Full Name"; }
+  td:nth-of-type(3):before { content: "Gotra"; }
+  td:nth-of-type(4):before { content: "Purpose"; }
+  td:nth-of-type(5):before { content: "Date"; }
+  td:nth-of-type(6):before { content: "Contact"; }
+  td:nth-of-type(7):before { content: "Address"; }
+  td:nth-of-type(8):before { content: "Created At"; }
+  td:nth-of-type(9):before { content: "Action"; }
+  
+  .action-cell button {
+    margin: 0 2px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+/* Dialog responsive styling */
+::ng-deep .mat-dialog-container {
+  padding: 0 !important;
+}
+
+@media (max-width: 480px) {
+  ::ng-deep .mat-dialog-container {
+    margin: 16px !important;
+  }
+}

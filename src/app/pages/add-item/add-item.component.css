@@ -1,0 +1,309 @@
+/* Container for all event cards */
+.events-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  padding: 40px 20px;
+  perspective: 1000px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Styling for each individual event card */
+.event-card {
+  background-color: #604f70; /* Muted Lavender */
+  border-radius: 12px; /* Slightly more rounded corners */
+  border: 1px solid #9e8b4e; /* Earthy Gold border */
+  box-shadow: 0 6px 12px rgba(45, 30, 63, 0.2); /* Deep Purple shadow */
+  overflow: hidden;
+  width: 300px; /* Slightly wider cards for better content display */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 20px; /* More padding at the bottom */
+  height: fit-content; /* Allow height to adjust based on content */
+  position: relative; /* Add positioning context */
+  align-self: flex-start; /* Keep card at the top */
+}
+
+/* Hover effect for cards */
+.event-card:hover {
+  transform: translateY(-8px); /* Lifts more on hover */
+  box-shadow: 0 10px 20px rgba(45, 30, 63, 0.3); /* Deeper shadow on hover */
+}
+
+/* Styling for the image within the card */
+.event-image {
+  width: 100%; /* Image takes full width of the card */
+  height: 200px; /* Slightly taller images */
+  object-fit: cover; /* Ensures images cover the area without distortion */
+  border-bottom: 1px solid #9e8b4e;
+}
+
+/* Styling for the details section of the card */
+.event-details {
+  padding: 20px; /* More padding inside details */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  height: auto;
+  min-height: fit-content;
+}
+
+/* Styling for the stone name/title */
+.event-details h3 {
+  margin-top: 0;
+  color: #e0c878; /* Golden Yellow */
+  font-size: 1.4em; /* Larger font for heading */
+  margin-bottom: 15px;
+  font-weight: 600; /* Slightly bolder font */
+}
+
+/* Styling for general paragraphs within details */
+.event-details p {
+  color: #ffffff; /* White text for better contrast */
+  font-size: 1em; /* Standard font size */
+  line-height: 1.6; /* Better readability */
+  margin-bottom: 8px; /* Space between paragraphs */
+}
+
+/* Styling for strong/bold text */
+.event-details strong {
+  color: #e0c878; /* Golden Yellow */
+  font-weight: 700; /* Even bolder for strong text */
+}
+
+/* Specific styling for the stone description */
+.stone-description {
+  margin-bottom: 15px;
+  min-height: 50px; /* Ensures consistent height for description area */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Styling for the "View More" button */
+.view-more-button {
+  background-color: #3c2a52; /* Dark Plum */
+  color: #e0c878; /* Golden Yellow text */
+  border: 1px solid #9e8b4e; /* Earthy Gold border */
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 15px; /* Space above the button */
+  transition: background-color 0.3s ease; /* Smooth transition for background */
+  width: auto; /* Button width adjusts to content */
+  align-self: center; /* Centers the button within the flex column */
+}
+
+.view-more-button:hover {
+  background-color: #2d1e3f; /* Deep Purple on hover */
+  border-color: #e0c878; /* Golden Yellow border on hover */
+}
+
+/* Flip card container */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Inner part of the flip card */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Flip card hover effect */
+.flip-card:hover {
+  z-index: 10;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front and back of the flip card */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(45, 30, 63, 0.2);
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  background-color: #604f70;
+  border: 1px solid #9e8b4e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Back side specific styling */
+.flip-card-back {
+  background-color: #3c2a52;
+  border: 1px solid #e0c878;
+  transform: rotateY(180deg);
+  padding: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Adjust the event details container */
+.flip-card-back .event-details {
+  height: calc(100% - 20px);
+  overflow-y: auto;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* Adjust description text for better fit */
+.flip-card-back .stone-description {
+  margin: 10px 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Price styling consistent on both sides */
+.price {
+  color: #ffffff;
+  font-size: 1.1em;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+/* Edit button styling */
+.edit-button {
+  background-color: #3c2a52;
+  color: #e0c878;
+  border: 1px solid #9e8b4e;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #2d1e3f;
+  border-color: #e0c878;
+}
+
+/* Edit form styling */
+.edit-form {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #3c2a52;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: calc(100% - 16px);
+  padding: 6px;
+  border: 1px solid #9e8b4e;
+  border-radius: 4px;
+  background-color: #2d1e3f;
+  color: #ffffff;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+.edit-form textarea {
+  height: 60px;
+  resize: none;
+}
+
+.edit-form input::placeholder,
+.edit-form textarea::placeholder {
+  color: rgba(224, 200, 120, 0.6);
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: auto;
+  padding: 10px 0;
+}
+
+/* Update flip card back to handle edit form */
+.flip-card-back {
+  background-color: #3c2a52;
+  border: 1px solid #e0c878;
+  transform: rotateY(180deg);
+  padding: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Adjust event details container height */
+.flip-card-back .event-details {
+  height: calc(100% - 20px);
+  overflow-y: auto;
+  padding: 10px;
+  margin: 0;
+}
+
+/* Make text smaller in edit mode */
+.edit-form label {
+  color: #e0c878;
+  font-size: 0.8em;
+  margin-bottom: 2px;
+}
+
+.save-button,
+.cancel-button {
+  padding: 6px 12px;
+  font-size: 0.9em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .events-container {
+    gap: 30px;
+    padding: 30px 15px;
+  }
+  
+  .flip-card {
+    width: 280px;
+    height: 380px;
+  }
+}
+
+@media (max-width: 480px) {
+  .events-container {
+    gap: 40px;
+    padding: 20px 10px;
+  }
+  
+  .flip-card {
+    width: 260px;
+    height: 360px;
+  }
+}

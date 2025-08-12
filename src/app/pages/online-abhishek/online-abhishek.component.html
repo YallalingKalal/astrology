@@ -1,0 +1,166 @@
+<div class="temple-container">
+  <h1 class="page-title" #pageTitle>Abhishek</h1>
+
+  <div style="text-align: right; margin-bottom: 1rem">
+    <button mat-raised-button color="primary" (click)="openAddTempleDialog()">
+      <mat-icon>add</mat-icon>
+      Add Temple
+    </button>
+  </div>
+
+  <div class="temple-grid">
+    <mat-card class="temple-card" *ngFor="let temple of temples; let i = index">
+      <div class="image-container">
+        <img
+          mat-card-image
+          [src]="temple.image"
+          [alt]="temple.name"
+          loading="lazy"
+          onerror="this.src='assets/images/fallback.webp'"
+        />
+        <div class="temple-overlay">
+          <span class="temple-location">
+            <mat-icon>location_on</mat-icon>
+            {{ temple.location }}
+          </span>
+        </div>
+      </div>
+      <mat-card-header>
+        <mat-card-title>{{ temple.name }}</mat-card-title>
+        <mat-card-subtitle>{{ temple.subtitle }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ temple.description }}</p>
+        <div class="seva-details">
+          <h3>Available Services:</h3>
+          <ul>
+            <li *ngFor="let service of parseServices(temple.services)">
+              <div class="seva-item">
+                <span class="seva-name">{{ service }}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="bookAbhishek(temple.name)"
+        >
+          <mat-icon>event</mat-icon>
+          Show Booking
+        </button>
+        <button
+          mat-icon-button
+          color="accent"
+          (click)="openAddTempleDialog(temple, i)"
+          matTooltip="Edit"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="removeTemple(i)"
+          matTooltip="Remove"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<!-- Dialog Template -->
+<ng-template #addTempleDialog>
+  <mat-dialog-content>
+    <mat-card class="temple-card add-temple-form">
+      <mat-card-header>
+        <mat-card-title>{{
+          editIndex !== null ? "Edit Temple" : "Add New Temple"
+        }}</mat-card-title>
+        <button mat-icon-button class="close-btn" (click)="closeDialog()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form
+          [formGroup]="addTempleForm"
+          (ngSubmit)="addTemple()"
+          class="form-container"
+        >
+          <mat-form-field appearance="outline">
+            <mat-label>Temple Name</mat-label>
+            <input matInput formControlName="name" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <input matInput formControlName="location" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Subtitle</mat-label>
+            <input matInput formControlName="subtitle" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              formControlName="description"
+              required
+            ></textarea>
+          </mat-form-field>
+
+          <!-- Image Upload Field (no URL field) -->
+          <div style="margin-bottom: 1rem">
+            <label style="font-weight: 500; color: #9e8b4e">Temple Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              (change)="onImageSelected($event)"
+              style="display: block; margin-top: 8px"
+            />
+            <div
+              *ngIf="selectedImage"
+              style="margin-top: 10px; text-align: center"
+            >
+              <img
+                [src]="selectedImage"
+                alt="Preview"
+                style="
+                  max-width: 100%;
+                  max-height: 180px;
+                  border-radius: 8px;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+                "
+              />
+            </div>
+          </div>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Services (comma separated)</mat-label>
+            <input matInput formControlName="services" required />
+          </mat-form-field>
+
+          <div class="form-buttons">
+            <button mat-button type="button" (click)="closeDialog()">
+              Cancel
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!addTempleForm.valid || !selectedImage"
+            >
+              {{ editIndex !== null ? "Update" : "Add" }}
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </mat-dialog-content>
+</ng-template>

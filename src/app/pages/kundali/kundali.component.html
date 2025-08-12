@@ -1,0 +1,56 @@
+<div class="kundali-form-container">
+  <h2>Kundali Details</h2>
+  <form [formGroup]="kundaliForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Full Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter full name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+        <mat-option value="other">Other</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Time of Birth</mat-label>
+      <input matInput type="time" formControlName="timeOfBirth">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Place of Birth</mat-label>
+      <input matInput formControlName="placeOfBirth" placeholder="Enter city, state">
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="outline">
+      <mat-label>Latitude</mat-label>
+      <input matInput formControlName="latitude" placeholder="Enter latitude">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Longitude</mat-label>
+      <input matInput formControlName="longitude" placeholder="Enter longitude">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Timezone</mat-label>   
+      <input matInput formControlName="timezone" placeholder="Enter timezone">
+    </mat-form-field> -->
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!kundaliForm.valid">
+        Generate Kundali
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,42 @@
+/* VR Video Form Styles */
+.vr-form-title {
+  text-align: center;
+  color: #e0c878;
+  margin-bottom: 24px;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.vr-form {
+  max-width: 420px;
+  margin: 32px auto 0 auto;
+  padding: 32px 24px 24px 24px;
+  /* background: linear-gradient(120deg, #2d1e3f 60%, #3c2a52 100%); */
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(45, 30, 63, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.vr-form-field {
+  width: 100%;
+}
+
+.vr-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+  .vr-form {
+    padding: 16px 6px 12px 6px;
+    max-width: 98vw;
+  }
+  .vr-form-title {
+    font-size: 1.2rem;
+  }
+}

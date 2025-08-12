@@ -1,0 +1,244 @@
+<div class="premium-container">
+  <!-- Form Section -->
+  <div *ngIf="!showList" class="form-section">
+    <div class="header-section">
+      <div class="logo-area">
+        <div class="brand-logo">
+          <mat-icon class="logo-icon">auto_awesome</mat-icon>
+          <span class="brand-name">ABHISHEK</span>
+        </div>
+        <!-- <div class="premium-badge">PREMIUM REGISTRATION</div> -->
+        <h1 class="main-title">
+          अभिषेक नोंदणी फॉर्म / Abhishek Registration Form
+        </h1>
+        <p class="subtitle">Join our exclusive spiritual community</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <mat-icon>verified</mat-icon>
+            <span>Verified Membership</span>
+          </div>
+          <div class="feature-item">
+            <mat-icon>security</mat-icon>
+            <span>Secure Registration</span>
+          </div>
+          <div class="feature-item">
+            <mat-icon>groups</mat-icon>
+            <span>Community Access</span>
+          </div>
+        </div>
+      </div>
+      <!-- <button
+        mat-fab
+        color="accent"
+        class="list-toggle-btn"
+        (click)="onShowList()"
+        matTooltip="View All Registrations"
+      >
+        <mat-icon>list_alt</mat-icon>
+      </button> -->
+    </div>
+
+    <div class="form-card">
+      <div class="card-header">
+        <div class="header-icon-wrapper">
+          <mat-icon class="form-icon">person_add</mat-icon>
+        </div>
+        <div class="header-text">
+          <h2>Registration Form</h2>
+          <p>Please fill all details carefully for your spiritual journey</p>
+        </div>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="premium-form">
+        <!-- Personal Information Section -->
+        <div class="form-section-header">
+          <mat-icon>person</mat-icon>
+          <h3>व्यक्तिगत माहिती / Personal Information</h3>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>
+              <mat-icon matPrefix>badge</mat-icon>
+              पूर्ण नाव / Full Name
+            </mat-label>
+            <input
+              matInput
+              formControlName="full_name"
+              required
+              placeholder="Enter your complete name"
+            />
+            <mat-hint>As per official documents</mat-hint>
+            <mat-error *ngIf="form.get('full_name')?.hasError('required')">
+              <mat-icon>error</mat-icon> आवश्यक / Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>
+              <mat-icon matPrefix>family_restroom</mat-icon>
+              गोत्र / Gotra
+            </mat-label>
+            <input
+              matInput
+              formControlName="gotra"
+              required
+              placeholder="Enter your family gotra"
+            />
+            <mat-hint>Traditional family lineage</mat-hint>
+            <mat-error *ngIf="form.get('gotra')?.hasError('required')">
+              <mat-icon>error</mat-icon> आवश्यक / Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>
+              <mat-icon matPrefix>family_restroom</mat-icon>
+              उद्देश / Purpose
+            </mat-label>
+            <input
+              matInput
+              formControlName="purpose"
+              required
+              placeholder="Enter your purpose for registration"
+            />
+            <mat-hint>Traditional family lineage</mat-hint>
+            <mat-error *ngIf="form.get('purpose')?.hasError('required')">
+              <mat-icon>error</mat-icon> आवश्यक / Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Registration Details Section -->
+        <div class="form-section-header">
+          <mat-icon>assignment</mat-icon>
+          <h3>नोंदणी तपशील / Registration Details</h3>
+        </div>
+
+        <div class="form-row">
+          <ng-container matColumnDef="purpose">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-icon>flag</mat-icon> उद्देश / Purpose
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.purpose }}</mat-cell>
+          </ng-container>
+        </div>
+
+        <div class="form-row double-column">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>
+              <mat-icon matPrefix>calendar_today</mat-icon>
+              नोंदणी दिनांक / Registration Date
+            </mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="date"
+              required
+            />
+            <mat-datepicker-toggle matIconSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon>date_range</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-hint>Select registration date</mat-hint>
+            <mat-error *ngIf="form.get('date')?.hasError('required')">
+              <mat-icon>error</mat-icon> आवश्यक / Required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>
+              <mat-icon matPrefix>phone</mat-icon>
+              संपर्क क्रमांक / Contact Number
+            </mat-label>
+            <input
+              matInput
+              formControlName="contact"
+              required
+              placeholder="+91 XXXXX XXXXX"
+              type="tel"
+            />
+            <mat-hint>Primary contact number</mat-hint>
+            <mat-error *ngIf="form.get('contact')?.hasError('required')">
+              <mat-icon>error</mat-icon> आवश्यक / Required
+            </mat-error>
+            <mat-error *ngIf="form.get('contact')?.hasError('pattern')">
+              <mat-icon>error</mat-icon> अवैध क्रमांक / Invalid Number
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Address Section -->
+        <div class="form-section-header">
+          <mat-icon>home</mat-icon>
+          <h3>निवास माहिती / Residential Information</h3>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>
+              <mat-icon matPrefix>location_on</mat-icon>
+              संपूर्ण पत्ता / Complete Address
+            </mat-label>
+            <textarea
+              matInput
+              formControlName="address"
+              required
+              placeholder="Enter your complete residential address with pin code"
+              rows="4"
+            ></textarea>
+            <mat-hint>Include city, state, and pin code</mat-hint>
+            <mat-error *ngIf="form.get('address')?.hasError('required')">
+              <mat-icon>error</mat-icon> आवश्यक / Required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+       
+
+        <div class="submit-section">
+          <div class="registration-benefits">
+            <h4>Registration Benefits:</h4>
+            <div class="benefits-grid">
+              <div class="benefit-item">
+                <mat-icon>star</mat-icon>
+                <span>Priority Access</span>
+              </div>
+              <div class="benefit-item">
+                <mat-icon>notifications</mat-icon>
+                <span>Event Updates</span>
+              </div>
+              <div class="benefit-item">
+                <mat-icon>book</mat-icon>
+                <span>Spiritual Resources</span>
+              </div>
+              <div class="benefit-item">
+                <mat-icon>support</mat-icon>
+                <span>Personal Guidance</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="form.invalid"
+            class="submit-btn"
+          >
+            <mat-icon>{{ editingId ? "save" : "how_to_reg" }}</mat-icon>
+            {{
+              editingId
+                ? "अद्यतन करा / Update Registration"
+                : "नोंदणी पूर्ण करा / Complete Registration"
+            }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../shared/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -33,16 +34,24 @@ export class LoginComponent {
   loginSuccess = false;
   errorMessage = '';
   isLoading = false;
+  private apiUrl = 'https://abhishekregister.astromonk.co.in/auth/auth/admin_login/';
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService,
-    private router: Router
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService // Inject AuthService if needed
   ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+  }
+  ngOnInit() {
+    // Check if user is already authenticated
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   onSubmit() {
@@ -50,25 +59,50 @@ export class LoginComponent {
       this.isLoading = true;
       this.errorMessage = '';
 
-      this.loginService.login(this.loginForm.value).subscribe({
-        next: (response) => {
-          if (response.status) {
-            this.loginSuccess = true;
-            // Navigate to dashboard after successful login
-            this.router.navigate(['/dashboard']);
-          } else {
-            this.errorMessage = response.message;
-          }
-        },
-        error: (error) => {
-          this.loginSuccess = false;
-          this.errorMessage =
-            error.error.message || 'Login failed. Please try again.';
-        },
-        complete: () => {
-          this.isLoading = false;
-        },
-      });
+      this.authService
+        .login(this.loginForm.value.email, this.loginForm.value.password)
+        .subscribe({
+          next: (response) => {
+            // Fix: Use response.response instead of response.data
+            if (
+              response &&
+              response.response &&
+              response.response.access_token
+            ) {
+              this.loginSuccess = true;
+              // Store token and user data
+              localStorage.setItem(
+                'access_token',
+                response.response.access_token
+              );
+              localStorage.setItem(
+                'refresh_token',
+                response.response.refresh_token
+              );
+              localStorage.setItem(
+                'userData',
+                JSON.stringify(response.response.user)
+              );
+              // Navigate to dashboard
+              this.router.navigate(['/dashboard']);
+            } else {
+              this.errorMessage = response.message || 'Login failed';
+            }
+          },
+          error: (error) => {
+            this.loginSuccess = false;
+            this.errorMessage =
+              error.error?.message || 'Login failed. Please try again.';
+            this.isLoading = false;
+          },
+          complete: () => {
+            this.isLoading = false;
+          },
+        });
     }
+  }
+
+  navigateToUserReg() {
+    this.router.navigate(['/userregistration']);
   }
 }

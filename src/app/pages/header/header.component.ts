@@ -33,8 +33,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  currentDate: string = new Date().toLocaleDateString();
-  constructor(private router: Router) { }
+  currentDate: string = new Date().toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+
+  constructor(private router: Router) { } 
 
 
 
