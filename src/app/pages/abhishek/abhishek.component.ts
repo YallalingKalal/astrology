@@ -57,6 +57,7 @@ export class AbhishekComponent implements OnInit {
       date: ['', Validators.required],
       contact: ['', [Validators.required, Validators.pattern('^[0-9]{10,}$')]],
       address: ['', Validators.required],
+      pooja_time: ['', Validators.required], // <-- Add this line
     });
   }
 
@@ -95,7 +96,9 @@ export class AbhishekComponent implements OnInit {
       this.abhishekService.addUser(formData).subscribe({
         next: (response: any) => {
           this.snackBar.open('डेटा सबमिट झाला! / Data submitted!', 'Close', {
-            duration: 2500,
+            duration: 3500,
+            panelClass: ['custom-success-snackbar'],
+            verticalPosition: 'top', // <-- Show at top
           });
           this.form.reset();
           this.isLoading = false;

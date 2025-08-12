@@ -34,18 +34,15 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit() {
-    // No GSAP animations
+    
   }
 
 
-  // Removed GSAP sidebar animations
-
-
-  // Removed GSAP menu animations
+  
 
   logout() {
     try {
-      localStorage. clear(); // Clear all localStorage items
+      localStorage. clear(); 
 
       this.router.navigate(['/login']);
     } catch (error) {

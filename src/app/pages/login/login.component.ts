@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../shared/auth/auth.service';
 
-@Component({
+@Component({ 
   selector: 'app-login',
   standalone: true,
   imports: [

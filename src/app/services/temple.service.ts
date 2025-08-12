@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs'; // <-- Add throwError here
-import { catchError, switchMap } from 'rxjs/operators'; // <-- Add catchError and switchMap here
+import { Observable, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { AuthService } from '../shared/auth/auth.service';
 
 export interface Temple {
-  id?: string; // id is optional for add, required for update/delete
+  id?: string;
   name: string;
   location: string;
   subtitle: string;
   description: string;
-  image: string; // base64 string or image URL
+  image: string;
   services: string[];
 }
 
@@ -18,23 +18,21 @@ export interface Temple {
   providedIn: 'root'
 })
 export class TempleService {
-  private readonly BASE_URL = 'http://192.168.0.186:8001';
+  private readonly BASE_URL = 'https://abhishekregister.astromonk.co.in/abhishek/temples';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  // Refresh token logic
   private refreshToken(): Observable<any> {
     return this.authService.refreshToken();
   }
 
-  // Get all temples
   getTemples(): Observable<any> {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.get(`${this.BASE_URL}/api/abhishek/temples/`, { headers }).pipe(
+    return this.http.get(`${this.BASE_URL}/`, { headers }).pipe(
       catchError((error) => {
         if (error.status === 401 && error.error.code === 'token_not_valid') {
           return this.refreshToken().pipe(
@@ -43,9 +41,7 @@ export class TempleService {
               const newHeaders = new HttpHeaders({
                 Authorization: `Bearer ${newToken}`,
               });
-              return this.http.get(`${this.BASE_URL}/abhishek/temples/`, {
-                headers: newHeaders,
-              });
+              return this.http.get(`${this.BASE_URL}/`, { headers: newHeaders });
             })
           );
         }
@@ -54,12 +50,10 @@ export class TempleService {
     );
   }
 
-  // Get a single temple by ID
   getTempleById(id: string): Observable<Temple> {
-    return this.http.get<Temple>(`${this.BASE_URL}${id}/`);
+    return this.http.get<Temple>(`${this.BASE_URL}/${id}/`);
   }
 
-  // Add a new temple
   addTemple(templeData: FormData): Observable<any> {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders({
@@ -67,7 +61,7 @@ export class TempleService {
     });
 
     return this.http
-      .post(`${this.BASE_URL}/api/abhishek/temples/`, templeData, { headers })
+      .post(`${this.BASE_URL}/`, templeData, { headers })
       .pipe(
         catchError((error) => {
           if (error.status === 401 && error.error.code === 'token_not_valid') {
@@ -78,7 +72,7 @@ export class TempleService {
                   Authorization: `Bearer ${newToken}`,
                 });
                 return this.http.post(
-                  `${this.BASE_URL}/api/abhishek/temples/`,
+                  `${this.BASE_URL}/`,
                   templeData,
                   { headers: newHeaders }
                 );
@@ -90,7 +84,6 @@ export class TempleService {
       );
   }
 
-  // Update an existing temple
   updateTemple(id: string, templeData: FormData): Observable<any> {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders({
@@ -98,7 +91,7 @@ export class TempleService {
     });
 
     return this.http
-      .put(`${this.BASE_URL}/api/abhishek/temples/${id}/`, templeData, { headers })
+      .put(`${this.BASE_URL}/${id}/`, templeData, { headers })
       .pipe(
         catchError((error) => {
           if (error.status === 401 && error.error.code === 'token_not_valid') {
@@ -109,7 +102,7 @@ export class TempleService {
                   Authorization: `Bearer ${newToken}`,
                 });
                 return this.http.put(
-                  `${this.BASE_URL}/api/abhishek/temples/${id}/`,
+                  `${this.BASE_URL}/${id}/`,
                   templeData,
                   { headers: newHeaders }
                 );
@@ -119,17 +112,15 @@ export class TempleService {
           return throwError(() => error);
         })
       );
-
   }
 
-  // Delete a temple
   deleteTemple(id: string): Observable<any> {
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.delete(`${this.BASE_URL}/api/abhishek/temples/${id}/`, { headers }).pipe(
+    return this.http.delete(`${this.BASE_URL}/${id}/`, { headers }).pipe(
       catchError((error) => {
         if (error.status === 401 && error.error.code === 'token_not_valid') {
           return this.refreshToken().pipe(
@@ -138,7 +129,7 @@ export class TempleService {
               const newHeaders = new HttpHeaders({
                 Authorization: `Bearer ${newToken}`,
               });
-              return this.http.delete(`${this.BASE_URL}/api/abhishek/temples/${id}/`, { headers: newHeaders });
+              return this.http.delete(`${this.BASE_URL}/${id}/`, { headers: newHeaders });
             })
           );
         }

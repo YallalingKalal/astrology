@@ -129,6 +129,7 @@
         </div>
 
         <div class="form-row double-column">
+          <!-- Registration Date -->
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>
               <mat-icon matPrefix>calendar_today</mat-icon>
@@ -150,24 +151,22 @@
             </mat-error>
           </mat-form-field>
 
+          <!-- Pooja Time (Time Only) -->
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>
-              <mat-icon matPrefix>phone</mat-icon>
-              संपर्क क्रमांक / Contact Number
+              <mat-icon matPrefix>schedule</mat-icon>
+              पूजा बुकिंग वेळ / Time for Booked Pooja
             </mat-label>
             <input
               matInput
-              formControlName="contact"
+              formControlName="pooja_time"
               required
-              placeholder="+91 XXXXX XXXXX"
-              type="tel"
+              type="time"
+              placeholder="Select time"
             />
-            <mat-hint>Primary contact number</mat-hint>
-            <mat-error *ngIf="form.get('contact')?.hasError('required')">
+            <mat-hint>Choose time for pooja</mat-hint>
+            <mat-error *ngIf="form.get('pooja_time')?.hasError('required')">
               <mat-icon>error</mat-icon> आवश्यक / Required
-            </mat-error>
-            <mat-error *ngIf="form.get('contact')?.hasError('pattern')">
-              <mat-icon>error</mat-icon> अवैध क्रमांक / Invalid Number
             </mat-error>
           </mat-form-field>
         </div>
@@ -198,7 +197,29 @@
           </mat-form-field>
         </div>
 
-       
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>
+              <mat-icon matPrefix>call</mat-icon>
+              संपर्क क्रमांक / Contact Number
+            </mat-label>
+            <input
+              matInput
+              formControlName="contact"
+              required
+              type="tel"
+              placeholder="Enter your 10 digit mobile number"
+              maxlength="15"
+            />
+            <mat-hint>Mobile number (10+ digits)</mat-hint>
+            <mat-error *ngIf="form.get('contact')?.hasError('required')">
+              <mat-icon>error</mat-icon> आवश्यक / Required
+            </mat-error>
+            <mat-error *ngIf="form.get('contact')?.hasError('pattern')">
+              <mat-icon>error</mat-icon> Valid number required
+            </mat-error>
+          </mat-form-field>
+        </div>
 
         <div class="submit-section">
           <div class="registration-benefits">
@@ -227,7 +248,7 @@
             mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="form.invalid"
+            
             class="submit-btn"
           >
             <mat-icon>{{ editingId ? "save" : "how_to_reg" }}</mat-icon>

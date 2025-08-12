@@ -1,49 +1,63 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AbhishekService {
-  private apiUrl = 'https://abhishekregister.astromonk.co.in/userregistration/user-registration/create_user/';
-  // private apiUrl =
-  //   'http://192.168.0.186:8001/api/user-registration/create_user/';
+  private BASE_URL = 'https://abhishekregister.astromonk.co.in/userregistration/user-registration';
 
   constructor(private http: HttpClient) {}
 
   addUser(data: any): Observable<any> {
-    return this.http.post(
-      this.apiUrl,
-      data
-    );
+    return this.http.post(`${this.BASE_URL}/create_user/`, data)
+      .pipe(
+        catchError((error) => {
+          console.error('Add user failed:', error);
+          return throwError(() => error);
+        })
+      );
   }
 
-  getAllData(): Observable<any[]> {
-    // Use the correct GET endpoint for listing users
-    return this.http.get<any[]>(
-      'https://abhishekregister.astromonk.co.in/userregistration/user-registration/list_users/'
-    );
+  getAllData(): Observable<any> {
+    return this.http.get(`${this.BASE_URL}/list_users/`)
+      .pipe(
+        catchError((error) => {
+          console.error('Get all data failed:', error);
+          return throwError(() => error);
+        })
+      );
   }
 
   getDataById(id: string): Observable<any> {
-    console.log('Fetching data by ID:', id);
-    // GET request for a specific record
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+    return this.http.get(`${this.BASE_URL}/retrieve_user/${id}/`)
+      .pipe(
+        catchError((error) => {
+          console.error('Get data by ID failed:', error);
+          return throwError(() => error);
+        })
+      );
   }
 
   updateData(id: string, data: any): Observable<any> {
-    // Use the correct UPDATE endpoint for your API
-    return this.http.put<any>(
-      `http://192.168.0.186:8001/api/user-registration/update_user/${id}/`,
-      data
-    );
+    return this.http.put(`${this.BASE_URL}/update_user/${id}/`, data)
+      .pipe(
+        catchError((error) => {
+          console.error('Update data failed:', error);
+          return throwError(() => error);
+        })
+      );
   }
 
   deleteData(id: string): Observable<any> {
-    // Use the correct DELETE endpoint for your API
-    return this.http.delete<any>(
-      `http://192.168.0.186:8001/api/user-registration/delete_user/${id}/`
-    );
+    return this.http.delete(`${this.BASE_URL}/delete_user/${id}/`)
+      .pipe(
+        catchError((error) => {
+          console.error('Delete data failed:', error);
+          return throwError(() => error);
+        })
+      );
   }
 }

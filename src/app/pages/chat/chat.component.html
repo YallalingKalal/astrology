@@ -1,128 +1,289 @@
-<div class="astrology-header">
-  <h1>Expert Astrologers</h1>
-  <p>Connect with India's most trusted astrologers for personalized guidance</p>
+
+<!-- Action Bar -->
+<div class="action-bar">
+  <button 
+    mat-raised-button 
+    color="primary" 
+    class="add-btn"
+    (click)="toggleRegistrationForm()">
+    <mat-icon>{{ showRegistrationForm ? 'close' : 'add' }}</mat-icon>
+    {{ showRegistrationForm ? 'Cancel' : 'Add New Astrologer' }}
+  </button>
 </div>
 
-<div class="search-filter">
-  <input type="text" placeholder="Search astrologers..." class="search-input">
-  <select class="filter-select">
-    <option value="">Filter by Specialization</option>
-    <option value="vedic">Vedic Astrology</option>
-    <option value="numerology">Numerology</option>
-    <option value="tarot">Tarot Reading</option>
-  </select>
-</div>
-
-<div class="astrologer-container">
-  <div class="astrologer-card" *ngFor="let astrologer of astrologers" [style.background-color]="astrologer.bgColor">
-    <div class="card-header">
-      <div class="profile-initial">{{ astrologer.name[0] }}</div>
-      <span class="availability-badge" [class.available]="astrologer.isAvailable">
-        {{ astrologer.isAvailable ? 'Available' : 'Busy' }}
-      </span>
-    </div>
-
-    <div class="card-content">
-      <div class="name-edit">
-        <ng-container *ngIf="!astrologer.isEditing; else editMode">
-          <h2 class="astrologer-name">{{ astrologer.name }}</h2>
-          <button class="edit-button" (click)="onEditProfile(astrologer)">
-            <i class="fas fa-edit"></i>
-          </button>
-        </ng-container>
+<!-- Registration Form -->
+<mat-card class="registration-panel" *ngIf="showRegistrationForm">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>person_add</mat-icon>
+      Register New Astrologer
+    </mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmitRegistration()" class="registration-form">
+      
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="name" placeholder="Enter full name">
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phone" placeholder="Enter phone number">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
       </div>
 
-      <ng-template #editMode>
-        <div class="edit-form">
-          <div class="form-group">
-            <label>Name:</label>
-            <input type="text" [(ngModel)]="editedAstrologer!.name" class="edit-input">
-          </div>
-
-          <div class="form-group">
-            <label>Phone:</label>
-            <input type="text" [(ngModel)]="editedAstrologer!.phone" class="edit-input">
-          </div>
-
-          <div class="form-group">
-            <label>Education:</label>
-            <input type="text" [(ngModel)]="editedAstrologer!.education" class="edit-input">
-          </div>
-
-          <div class="form-group">
-            <label>Experience (years):</label>
-            <input type="number" [(ngModel)]="editedAstrologer!.experience" class="edit-input">
-          </div>
-
-          <div class="form-group">
-            <label>Price (₹):</label>
-            <input type="number" [(ngModel)]="editedAstrologer!.price" class="edit-input">
-          </div>
-
-          <div class="form-group">
-            <label>Languages:</label>
-            <div class="tags-container">
-              <span class="tag" *ngFor="let lang of editedAstrologer!.languages">
-                {{ lang }}
-                <i class="fas fa-times" (click)="removeLanguage(lang, editedAstrologer!)"></i>
-              </span>
-            </div>
-            <input type="text" placeholder="Add language..." class="edit-input"
-                   (keyup)="onAddLanguage($event, editedAstrologer!)">
-          </div>
-
-          <div class="form-group">
-            <label>Specializations:</label>
-            <div class="tags-container">
-              <span class="tag" *ngFor="let spec of editedAstrologer!.specialization">
-                {{ spec }}
-                <i class="fas fa-times" (click)="removeSpecialization(spec, editedAstrologer!)"></i>
-              </span>
-            </div>
-            <input type="text" placeholder="Add specialization..." class="edit-input"
-                   (keyup)="onAddSpecialization($event, editedAstrologer!)">
-          </div>
-
-          <div class="edit-actions">
-            <button class="save-button" (click)="onSaveProfile(astrologer)">
-              <i class="fas fa-check"></i> Save
-            </button>
-            <button class="cancel-button" (click)="onCancelEdit(astrologer)">
-              <i class="fas fa-times"></i> Cancel
-            </button>
-          </div>
-        </div>
-      </ng-template>
-
-      <div class="rating">
-        <span class="stars">★★★★★</span>
-        <span class="rating-number">{{ astrologer.rating }}/5</span>
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Education</mat-label>
+          <input matInput formControlName="education" placeholder="Educational qualification">
+          <mat-icon matSuffix>school</mat-icon>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" placeholder="Current city">
+          <mat-icon matSuffix>location_city</mat-icon>
+        </mat-form-field>
       </div>
 
-      <div class="astrologer-details">
-        <p><i class="fas fa-graduation-cap"></i> {{ astrologer.education }}</p>
-        <p><i class="fas fa-language"></i> {{ astrologer.languages.join(', ') }}</p>
-        <p><i class="fas fa-star"></i> Experience: {{ astrologer.experience }} years</p>
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Experience (Years)</mat-label>
+          <input matInput type="number" formControlName="experience" placeholder="Years of experience">
+          <mat-icon matSuffix>timeline</mat-icon>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Consultation Price (₹)</mat-label>
+          <input matInput type="number" formControlName="price" placeholder="Price per session">
+          <mat-icon matSuffix>currency_rupee</mat-icon>
+        </mat-form-field>
       </div>
 
-      <div class="specialization-tags">
-        <span class="tag" *ngFor="let spec of astrologer.specialization">
-          {{ spec }}
-        </span>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="3" placeholder="Brief description about expertise"></textarea>
+        <mat-icon matSuffix>description</mat-icon>
+      </mat-form-field>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Specializations</mat-label>
+          <mat-select formControlName="specialization" multiple>
+            <mat-option *ngFor="let spec of specializationOptions" [value]="spec">
+              {{ spec }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>auto_awesome</mat-icon>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Languages</mat-label>
+          <mat-select formControlName="languages" multiple>
+            <mat-option *ngFor="let lang of languageOptions" [value]="lang">
+              {{ lang }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>language</mat-icon>
+        </mat-form-field>
       </div>
 
-      <div class="consultation-info">
-        <div class="price">
-          <span class="amount">₹{{ astrologer.price }}</span>
-          <span class="duration">/30 mins</span>
-        </div>
-        <button 
-          class="talk-button" 
-          [disabled]="!astrologer.isAvailable"
-          (click)="onTalkToAstrologer(astrologer.phone)">
-          <i class="fab fa-whatsapp"></i> Chat Now
+      <div class="form-actions">
+        <button type="button" mat-button (click)="toggleRegistrationForm()">
+          Cancel
+        </button>
+        <button type="submit" mat-raised-button color="primary">
+          <mat-icon>save</mat-icon>
+          Register Astrologer
         </button>
       </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<!-- Search and Filter -->
+<div class="search-filter">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search astrologers...</mat-label>
+    <input matInput [(ngModel)]="searchTerm" placeholder="Search by name or specialization">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  
+  <mat-form-field appearance="outline">
+    <mat-label>Filter by Status</mat-label>
+    <mat-select [(value)]="selectedFilter">
+      <mat-option value="all">All Astrologers</mat-option>
+      <mat-option value="available">Available Only</mat-option>
+      <mat-option value="offline">Offline Only</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<!-- Astrologer Grid -->
+<div class="astrologer-grid">
+  <mat-card 
+    *ngFor="let astrologer of filteredAstrologers" 
+    class="astrologer-card"
+    [class.editing]="astrologer.isEditing">
+    
+    <!-- Normal View -->
+    <div *ngIf="!astrologer.isEditing">
+      <!-- Header -->
+      <div class="compact-header">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="avatar-initial">
+            {{ astrologer.name.charAt(0) }}
+          </div>
+          <div style="flex: 1;">
+            <div class="compact-title">{{ astrologer.name }}</div>
+            <div class="compact-subtitle">
+              <mat-icon class="inline-icon">school</mat-icon>
+              {{ astrologer.education }}
+            </div>
+          </div>
+        </div>
+        
+        <div class="header-actions">
+          <mat-icon 
+            class="status-indicator"
+            [class.available]="astrologer.isAvailable"
+            [class.busy]="!astrologer.isAvailable"
+            (click)="toggleAvailability(astrologer)"
+            style="cursor: pointer;">
+            {{ astrologer.isAvailable ? 'radio_button_checked' : 'radio_button_unchecked' }}
+          </mat-icon>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="compact-content">
+        <div class="info-row">
+          <div class="info-item">
+            <mat-icon class="small-icon">schedule</mat-icon>
+            <span>{{ astrologer.experience }} years</span>
+          </div>
+          <div class="info-item">
+            <mat-icon class="small-icon">location_city</mat-icon>
+            <span>{{ astrologer.city }}</span>
+          </div>
+          <div class="info-item">
+            <mat-icon class="small-icon">phone</mat-icon>
+            <span>{{ astrologer.phone }}</span>
+          </div>
+        </div>
+
+        <!-- Specialization Chips -->
+        <div class="specialization-chips" *ngIf="astrologer.specialization.length > 0">
+          <mat-chip-listbox>
+            <mat-chip-option 
+              *ngFor="let spec of astrologer.specialization.slice(0, 3)" 
+              selected disabled>
+              {{ spec }}
+            </mat-chip-option>
+            <mat-chip-option 
+              *ngIf="astrologer.specialization.length > 3" 
+              class="more-chip" disabled>
+              +{{ astrologer.specialization.length - 3 }} more
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+
+        <!-- Languages -->
+        <div class="languages" *ngIf="astrologer.languages.length > 0">
+          <mat-icon class="small-icon">language</mat-icon>
+          <span>{{ astrologer.languages.join(', ') }}</span>
+        </div>
+
+        <!-- Description -->
+        <p *ngIf="astrologer.description" style="margin: 8px 0; font-size: 0.85rem; color: #666;">
+          {{ astrologer.description }}
+        </p>
+      </div>
+
+      <!-- Actions -->
+      <div class="compact-actions">
+        <div class="price-section">
+          <span class="price">₹{{ astrologer.price }}</span>
+          <span class="price-label">/session</span>
+        </div>
+        
+        <div class="action-buttons">
+          <button mat-icon-button class="delete-btn" (click)="onDeleteProfile(astrologer)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onEditProfile(astrologer)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-raised-button color="primary" class="chat-btn" (click)="onTalkToAstrologer(astrologer.phone)">
+            <mat-icon>chat</mat-icon>
+            Talk
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
+
+    <!-- Edit Mode -->
+    <div *ngIf="astrologer.isEditing" class="edit-mode">
+      <mat-card-header>
+        <mat-card-title>Edit Profile</mat-card-title>
+      </mat-card-header>
+      
+      <div class="edit-content">
+        <div class="edit-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="editedAstrologer!.name">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput [(ngModel)]="editedAstrologer!.phone">
+          </mat-form-field>
+        </div>
+        
+        <div class="edit-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Education</mat-label>
+            <input matInput [(ngModel)]="editedAstrologer!.education">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <input matInput [(ngModel)]="editedAstrologer!.city">
+          </mat-form-field>
+        </div>
+        
+        <div class="edit-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Experience</mat-label>
+            <input matInput type="number" [(ngModel)]="editedAstrologer!.experience">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" [(ngModel)]="editedAstrologer!.price">
+          </mat-form-field>
+        </div>
+        
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="editedAstrologer!.description"></textarea>
+        </mat-form-field>
+      </div>
+      
+      <mat-card-actions>
+        <button mat-button (click)="onCancelEdit(astrologer)">Cancel</button>
+        <button mat-raised-button color="primary" (click)="onSaveProfile(astrologer)">Save</button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</div>
+
+<!-- No Results -->
+<div *ngIf="filteredAstrologers.length === 0" class="no-results">
+  <mat-icon class="no-results-icon">search_off</mat-icon>
+  <h3>No astrologers found</h3>
+  <p>Try adjusting your search criteria or add a new astrologer.</p>
 </div>

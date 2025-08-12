@@ -16,7 +16,7 @@ export interface EventBooking {
   providedIn: 'root'
 })
 export class EventService {
-  private BASE_URL = 'http://192.168.0.186:8001/api/events/api/events/';
+  private BASE_URL = 'https://abhishekregister.astromonk.co.in/events/api/events/';
 
   constructor(private http: HttpClient) {}
 

@@ -57,8 +57,16 @@ export class OnlineAbhishekComponent {
   loadTemples() {
     this.templeService.getTemples().subscribe({
       next: data => {
-        console.log('API data:', data);
-        this.temples = data.response;
+        // Try to extract array from common API response shapes
+        if (Array.isArray(data)) {
+          this.temples = data;
+        } else if (data && Array.isArray(data.results)) {
+          this.temples = data.results;
+        } else if (data && Array.isArray(data.data)) {
+          this.temples = data.data;
+        } else {
+          this.temples = [];
+        }
       },
       error: err => {
         console.error('API error:', err);

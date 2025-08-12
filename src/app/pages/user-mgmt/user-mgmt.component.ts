@@ -50,6 +50,7 @@ export class UserMgmtComponent implements OnInit {
   /* ---------- table ---------- */
   displayedColumns: string[] = [
     'id', 'full_name', 'gotra', 'purpose', 'date',
+    'pooja_time', // <-- Add this
     'contact', 'address', 'created_at', 'action'
   ];
   dataSource = new MatTableDataSource<any>([]);
